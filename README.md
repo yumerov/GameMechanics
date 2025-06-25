@@ -1,2 +1,27 @@
 # GameMechanics
-Collection of game mechanics demoes 
+
+Collection of game mechanics demos.
+
+## Technical requirement
+
+Dotnet 9
+
+## How to add new features
+
+1. Create feature project `dotnet new classlib -n <Feature> -o src/<Feature>`
+2. Link the project `dotnet sln add src/<Feature>/<Feature>.csproj --solution-folder <Feature>`
+3. Create the test project `dotnet new xunit -n <Feature>.Tests -o tests/<Feature>.Tests`
+4. Link the test project `dotnet sln add tests/<Feature>.Tests/<Feature>.Tests.csproj --solution-folder <Feature>.Tests`
+
+## Quality
+
+Setup GitHub action in `.github/workflows` similar to Common.
+
+To `main.yml` add
+```yml
+common:
+    if: endsWith(needs.detect-commit.outputs.msg, '--common') || endsWith(needs.detect-commit.outputs.msg, '--build')
+    uses: ./.github/workflows/common.yml
+```
+
+[Todo](TODO.md)

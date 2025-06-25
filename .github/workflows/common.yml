@@ -1,0 +1,17 @@
+name: Common
+
+on:
+  workflow_call:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'
+
+      - run: dotnet restore src/Common/Common.csproj
+      - run: dotnet build src/Common/Common.csproj --configuration Release
+      - run: dotnet test tests/Common.Tests/Common.Tests.csproj --configuration Release

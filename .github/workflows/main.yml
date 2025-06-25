@@ -1,0 +1,11 @@
+name: 🚀 Game Mechanics Master Pipeline
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  common:
+    uses: ./.github/workflows/common.yml
