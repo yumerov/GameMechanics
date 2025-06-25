@@ -8,5 +8,4 @@ on:
 
 jobs:
   common:
-    if: endsWith(needs.detect-commit.outputs.msg, '--build')
     uses: ./.github/workflows/common.yml
