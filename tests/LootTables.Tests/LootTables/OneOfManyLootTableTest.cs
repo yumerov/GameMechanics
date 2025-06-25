@@ -35,8 +35,6 @@ public class OneOfManyLootTableTest
         // Arrange
         var table = new OneOfManyLootTable();
         var skeleton = new Skeleton();
-        var club = new BoneClub();
-        var helmet = new SkullHelmet();
         table.RegisterFor(typeof(Skeleton), [typeof(BoneClub), typeof(SkullHelmet)]);
         
         // Act
@@ -47,19 +45,19 @@ public class OneOfManyLootTableTest
 
         for (var index = 0; index < 2 * sampleSize; index++)
         {
-            var loot = table.LootFor(skeleton)[0].ToString()!;
-            if (loot.Equals(club.ToString()))
+            var loot = table.LootFor(skeleton)[0];
+            switch (loot)
             {
-                clubCount++;
-            } else if (loot.Equals(helmet.ToString()))
-            {
-                helmetCount++;
+                case BoneClub:
+                    clubCount++;
+                    break;
+                case SkullHelmet:
+                    helmetCount++;
+                    break;
+                default:
+                    Assert.Fail("Unexpected item");
+                    break;
             }
-            else
-            {
-                Assert.Fail("Unexpected item");
-            }
-
         }
 
         // Assert

@@ -12,7 +12,8 @@ public class App
 {
     public static readonly Dim ColWidth = Dim.Percent(33)!;
 
-    private readonly ObservableCollection<LootTable> _menuItems = [
+    private readonly ObservableCollection<LootTable> _menuItems =
+    [
         GuaranteeLootTableRegister.DefaultInit(),
         OneOfManyLootTableRegister.DefaultInit()
     ];
@@ -27,18 +28,18 @@ public class App
 
         var menuList = new ListView<LootTable>(_menuItems);
         menuList.OpenSelectedItem += (_, args) => OnLootTableTypeSelectedSelected(args);
-        
+
         var enemyList = new ListView<LootableEnemy>(_enemies);
         enemyList.OpenSelectedItem += (_, args) => OnEnemySelected(args);
-        
+
         var logList = new ListView<string>(_logs);
-        
+
         var menuView = new Window("Loot Tables types").Add(menuList);
         var enemyView = new Window("Enemies", menuView).Add(enemyList);
         var logView = new Window("Logs", enemyView).Add(logList);
-        
+
         container.Add(menuView, enemyView, logView);
-        
+
         Application.Run(container.Toplevel);
         Application.Shutdown();
     }
@@ -52,7 +53,7 @@ public class App
             {
                 continue;
             }
-                
+
             var loots = lootTable.LootFor(enemy);
             foreach (var loot in loots)
             {
@@ -60,7 +61,7 @@ public class App
             }
         }
     }
-    
+
     private void OnLootTableTypeSelectedSelected(ListViewItemEventArgs args)
     {
         var selectedLootTable = _menuItems[args.Item];
@@ -68,7 +69,10 @@ public class App
         _enemies.Clear();
         foreach (var enemyType in selectedLootTable.EnemyTypes)
         {
-            _enemies.Add((Activator.CreateInstance(enemyType) as LootableEnemy)!);
+            if (Activator.CreateInstance(enemyType) is LootableEnemy enemy)
+            {
+                _enemies.Add(enemy);
+            }
         }
     }
 }

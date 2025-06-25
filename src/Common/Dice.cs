@@ -2,7 +2,7 @@ namespace Common;
 
 public class Dice(int min, int max)
 {
-    private readonly Random _random = new Random();
+    private static readonly Random Random = new();
 
-    public int Throw() => _random.Next(min, max + 1);
+    public int Throw() => Random.Next(min, max + 1);
 }

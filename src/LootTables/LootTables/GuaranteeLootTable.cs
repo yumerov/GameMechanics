@@ -9,11 +9,14 @@ public class GuaranteeLootTable : LootTable
 
     public override List<LootItem> LootFor(LootableEnemy enemy)
     {
-        List<Type>? enemyItemTypes = EnemyItemsMap[enemy.GetType()];
-        if (enemyItemTypes == null) return [];
+        if (!EnemyItemsMap.TryGetValue(enemy.GetType(), out var enemyItemTypes))
+        {
+            return [];
+        }
         
         return enemyItemTypes
-            .Select(type => Activator.CreateInstance(type) as LootItem)!
-            .ToList<LootItem>();
+            .Select(type => Activator.CreateInstance(type) as LootItem)
+            .OfType<LootItem>()
+            .ToList();
     }
 }
