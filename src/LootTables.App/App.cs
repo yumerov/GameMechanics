@@ -13,7 +13,8 @@ public class App
     public static readonly Dim ColWidth = Dim.Percent(33)!;
 
     private readonly ObservableCollection<LootTable> _menuItems = [
-        GuaranteeLootTableRegister.DefaultInit()
+        GuaranteeLootTableRegister.DefaultInit(),
+        OneOfManyLootTableRegister.DefaultInit()
     ];
 
     private readonly ObservableCollection<LootableEnemy> _enemies = [];
@@ -63,13 +64,11 @@ public class App
     private void OnLootTableTypeSelectedSelected(ListViewItemEventArgs args)
     {
         var selectedLootTable = _menuItems[args.Item];
-        if (selectedLootTable is GuaranteeLootTable)
+
+        _enemies.Clear();
+        foreach (var enemyType in selectedLootTable.EnemyTypes)
         {
-            _enemies.Clear();
-            foreach (var enemyType in selectedLootTable.EnemyTypes)
-            {
-                _enemies.Add((Activator.CreateInstance(enemyType) as LootableEnemy)!);
-            }
+            _enemies.Add((Activator.CreateInstance(enemyType) as LootableEnemy)!);
         }
     }
 }

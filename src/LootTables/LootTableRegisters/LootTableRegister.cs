@@ -4,6 +4,4 @@ using LootTables.LootTables;
 
 namespace LootTables.LootTableRegisters;
 
-public class LootTableRegister
-{
-}
+public class LootTableRegister;
