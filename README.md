@@ -6,6 +6,11 @@ Collection of game mechanics demos.
 
 Dotnet 9
 
+## Sub-projects
+
+- [Common](src/Common/README.md)
+- [Loot tables](src/LootTables/README.md)
+
 ## How to add new features
 
 1. Create feature project `dotnet new classlib -n <Feature> -o src/<Feature>`
