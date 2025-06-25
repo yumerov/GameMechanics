@@ -10,8 +10,9 @@ Dotnet 9
 
 1. Create feature project `dotnet new classlib -n <Feature> -o src/<Feature>`
 2. Link the project `dotnet sln add src/<Feature>/<Feature>.csproj --solution-folder <Feature>`
-3. Create the test project `dotnet new xunit -n <Feature>.Tests -o tests/<Feature>.Tests`
-4. Link the test project `dotnet sln add tests/<Feature>.Tests/<Feature>.Tests.csproj --solution-folder <Feature>.Tests`
+3. Link the project to Common `dotnet add src/<Feature>/<Feature>.csproj reference src/Common/Common.csproj`
+4. Create the test project `dotnet new xunit -n <Feature>.Tests -o tests/<Feature>.Tests`
+5. Link the test project `dotnet sln add tests/<Feature>.Tests/<Feature>.Tests.csproj --solution-folder <Feature>.Tests`
 
 ## Quality
 
