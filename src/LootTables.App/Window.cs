@@ -1,5 +1,4 @@
 using Terminal.Gui.ViewBase;
-using Terminal.Gui.Views;
 using BaseWindow = Terminal.Gui.Views.Window;
 
 namespace LootTables.App;

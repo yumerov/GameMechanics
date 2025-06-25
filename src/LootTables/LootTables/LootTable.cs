@@ -3,13 +3,11 @@ using LootTables.LootItems;
 
 namespace LootTables.LootTables;
 
-public abstract class LootTable
+public abstract class LootTable : ILootTable
 {
     protected readonly Dictionary<Type, List<Type>> EnemyItemsMap = new();
-
     public List<Type> EnemyTypes => EnemyItemsMap.Keys.ToList();
-
+    
     public void RegisterFor(Type enemyType, List<Type> items) => EnemyItemsMap.TryAdd(enemyType, items);
-
     public abstract List<LootItem> LootFor(LootableEnemy enemy);
 }

@@ -4,7 +4,7 @@ using LootTables.LootTables;
 
 namespace LootTables.LootTableRegisters;
 
-public class OneOfManyLootTableRegister : LootTableRegister
+public static class OneOfManyLootTableRegister
 {
     public static OneOfManyLootTable DefaultInit()
     {
