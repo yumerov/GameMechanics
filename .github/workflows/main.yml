@@ -9,3 +9,5 @@ on:
 jobs:
   common:
     uses: ./.github/workflows/common.yml
+  loot-tables:
+    uses: ./.github/workflows/loot-tables.yml
