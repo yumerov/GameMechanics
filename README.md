@@ -10,6 +10,7 @@ Dotnet 9
 
 - [Common](src/Common/README.md)
 - [Loot tables](src/LootTables/README.md)
+- [Loot tables - app](src/LootTables.App/README.md)
 
 ## How to add new features
 

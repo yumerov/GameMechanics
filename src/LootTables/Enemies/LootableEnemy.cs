@@ -2,6 +2,4 @@ using Common;
 
 namespace LootTables.Enemies;
 
-public class LootableEnemy : Enemy
-{
-}
+public class LootableEnemy : Enemy;
