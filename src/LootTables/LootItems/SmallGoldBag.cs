@@ -1,6 +1,3 @@
 namespace LootTables.LootItems;
 
-public class SmallGoldBag : LootItem
-{
-    public override string ToString() => "5 gold coins";
-}
+public class SmallGoldBag() : ContainerItem(5, typeof(GoldenCoin));

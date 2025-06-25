@@ -11,8 +11,7 @@ public class GuaranteeLootTableRegister : LootTableRegister
         var table = new GuaranteeLootTable();
     
         table.RegisterFor(typeof(Rat), [typeof(SmallGoldBag), typeof(RatTail)]);
-        table.RegisterFor(typeof(Slime), []);
-        table.RegisterFor(typeof(Skeleton), []);
+        table.RegisterFor(typeof(Slime), [typeof(AcidicSlimeBalls)]);
         
         return table;
     }
