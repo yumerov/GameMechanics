@@ -1,0 +1,16 @@
+name: Loot Tables App
+
+on:
+  workflow_call:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'
+
+      - run: dotnet restore src/LootTables.App/LootTables.App.csproj
+      - run: dotnet build src/LootTables.App/LootTables.App.csproj --configuration Release
