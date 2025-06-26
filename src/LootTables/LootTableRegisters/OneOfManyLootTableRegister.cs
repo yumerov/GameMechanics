@@ -6,7 +6,7 @@ namespace LootTables.LootTableRegisters;
 
 public static class OneOfManyLootTableRegister
 {
-    public static OneOfManyLootTable DefaultInit()
+    public static ILootTable DefaultInit()
     {
         var table = new OneOfManyLootTable();
     

@@ -12,13 +12,13 @@ public class App
 {
     public static readonly Dim ColWidth = Dim.Percent(33)!;
 
-    private readonly ObservableCollection<LootTable> _menuItems =
+    private readonly ObservableCollection<ILootTable> _menuItems =
     [
         GuaranteeLootTableRegister.DefaultInit(),
         OneOfManyLootTableRegister.DefaultInit()
     ];
 
-    private readonly ObservableCollection<LootableEnemy> _enemies = [];
+    private readonly ObservableCollection<ILootableEnemy> _enemies = [];
     private readonly ObservableCollection<string> _logs = [];
 
     public void Run()
@@ -26,10 +26,10 @@ public class App
         Application.Init();
         var container = new Container();
 
-        var menuList = new ListView<LootTable>(_menuItems);
+        var menuList = new ListView<ILootTable>(_menuItems);
         menuList.OpenSelectedItem += (_, args) => OnLootTableTypeSelectedSelected(args);
 
-        var enemyList = new ListView<LootableEnemy>(_enemies);
+        var enemyList = new ListView<ILootableEnemy>(_enemies);
         enemyList.OpenSelectedItem += (_, args) => OnEnemySelected(args);
 
         var logList = new ListView<string>(_logs);
@@ -69,7 +69,7 @@ public class App
         _enemies.Clear();
         foreach (var enemyType in selectedLootTable.EnemyTypes)
         {
-            if (Activator.CreateInstance(enemyType) is LootableEnemy enemy)
+            if (Activator.CreateInstance(enemyType) is ILootableEnemy enemy)
             {
                 _enemies.Add(enemy);
             }

@@ -8,7 +8,7 @@ public class OneOfManyLootTable : LootTable
 {
     public override string ToString() => "One of Many";
 
-    public override List<LootItem> LootFor(LootableEnemy enemy)
+    public override List<ILootItem> LootFor(ILootableEnemy enemy)
     {
         var enemyItemTypes = GetLootFactories(enemy);
         if (enemyItemTypes.Count == 0)

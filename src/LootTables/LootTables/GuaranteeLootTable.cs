@@ -7,7 +7,7 @@ public class GuaranteeLootTable : LootTable
 {
     public override string ToString() => "Guarantee";
 
-    public override List<LootItem> LootFor(LootableEnemy enemy) => GetLootFactories(enemy)
+    public override List<ILootItem> LootFor(ILootableEnemy enemy) => GetLootFactories(enemy)
         .Select(factory => factory())
         .ToList();
 }

@@ -6,7 +6,7 @@ namespace LootTables.LootTableRegisters;
 
 public static class GuaranteeLootTableRegister
 {
-    public static GuaranteeLootTable DefaultInit()
+    public static ILootTable DefaultInit()
     {
         var table = new GuaranteeLootTable();
     
