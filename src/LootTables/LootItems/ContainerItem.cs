@@ -1,6 +1,6 @@
 namespace LootTables.LootItems;
 
-public class ContainerItem(int count, Type type) : LootItem
+public class ContainerItem<TContainedItem>(int count) : LootItem where TContainedItem : LootItem, new()
 {
-    public override string ToString() => $"{count} {Activator.CreateInstance(type)}s";
+    public override string ToString() => $"{count} {typeof(TContainedItem).Name}s";
 }

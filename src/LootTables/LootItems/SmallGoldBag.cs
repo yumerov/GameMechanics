@@ -1,3 +1,3 @@
 namespace LootTables.LootItems;
 
-public class SmallGoldBag() : ContainerItem(5, typeof(GoldenCoin));
+public class SmallGoldBag() : ContainerItem<GoldenCoin>(5);
