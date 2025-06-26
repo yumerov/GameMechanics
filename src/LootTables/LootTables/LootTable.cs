@@ -5,9 +5,16 @@ namespace LootTables.LootTables;
 
 public abstract class LootTable : ILootTable
 {
-    protected readonly Dictionary<Type, List<Type>> EnemyItemsMap = new();
-    public IReadOnlyCollection<Type> EnemyTypes => EnemyItemsMap.Keys;
+    protected readonly Dictionary<Type, List<Func<LootItem>>> EnemyItemFactoriesMap = new();
+    public IReadOnlyCollection<Type> EnemyTypes => EnemyItemFactoriesMap.Keys;
 
-    public void RegisterFor(Type enemyType, List<Type> items) => EnemyItemsMap.TryAdd(enemyType, items);
+    public void RegisterFor(Type enemyType, List<Func<LootItem>> itemFactories) => EnemyItemFactoriesMap
+        .TryAdd(enemyType, itemFactories);
+
+    public List<Func<LootItem>> GetLootFactories(LootableEnemy enemy)
+    {
+        return !EnemyItemFactoriesMap.TryGetValue(enemy.GetType(), out var enemyItemTypes) ? [] : enemyItemTypes;
+    }
+
     public abstract List<LootItem> LootFor(LootableEnemy enemy);
 }

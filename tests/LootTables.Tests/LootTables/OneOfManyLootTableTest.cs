@@ -14,7 +14,7 @@ public class OneOfManyLootTableTest
         var rat = typeof(Rat);
         
         // Act
-        table.RegisterFor(rat, [typeof(RatTail), typeof(SmallGoldBag)]);
+        table.RegisterFor(rat, [() => new RatTail(), () => new SmallGoldBag()]);
         
         // Assert
         Assert.Equal([rat], table.EnemyTypes);
@@ -23,7 +23,7 @@ public class OneOfManyLootTableTest
         var slime = typeof(Slime);
         
         // Act
-        table.RegisterFor(slime, [typeof(AcidicSlimeBall)]);
+        table.RegisterFor(slime, [() => new AcidicSlimeBall()]);
         
         // Assert
         Assert.Equal([rat, slime], table.EnemyTypes);
@@ -35,7 +35,7 @@ public class OneOfManyLootTableTest
         // Arrange
         var table = new OneOfManyLootTable();
         var skeleton = new Skeleton();
-        table.RegisterFor(typeof(Skeleton), [typeof(BoneClub), typeof(SkullHelmet)]);
+        table.RegisterFor(typeof(Skeleton), [() => new BoneClub(), () => new SkullHelmet()]);
         
         // Act
         var clubCount = 0;

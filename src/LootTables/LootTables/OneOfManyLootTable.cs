@@ -10,15 +10,15 @@ public class OneOfManyLootTable : LootTable
 
     public override List<LootItem> LootFor(LootableEnemy enemy)
     {
-        if (!EnemyItemsMap.TryGetValue(enemy.GetType(), out var enemyItemTypes))
+        var enemyItemTypes = GetLootFactories(enemy);
+        if (enemyItemTypes.Count == 0)
         {
             return [];
         }
 
-        var dice = new Dice(0, enemyItemTypes.Count - 1);
+        var selectedIndex = new Dice(0, enemyItemTypes.Count - 1).Throw();
+        var selectedItemFactory = enemyItemTypes[selectedIndex];
 
-        var selectedItem = enemyItemTypes[dice.Throw()];
-
-        return Activator.CreateInstance(selectedItem) is LootItem lootItem ? [lootItem] : [];
+        return [selectedItemFactory()];
     }
 }

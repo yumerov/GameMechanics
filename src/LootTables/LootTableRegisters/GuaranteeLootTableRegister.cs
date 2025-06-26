@@ -10,8 +10,8 @@ public static class GuaranteeLootTableRegister
     {
         var table = new GuaranteeLootTable();
     
-        table.RegisterFor(typeof(Rat), [typeof(SmallGoldBag), typeof(RatTail)]);
-        table.RegisterFor(typeof(Slime), [typeof(AcidicSlimeBall)]);
+        table.RegisterFor(typeof(Rat), [() => new SmallGoldBag(), () => new RatTail()]);
+        table.RegisterFor(typeof(Slime), [() => new AcidicSlimeBall()]);
         
         return table;
     }

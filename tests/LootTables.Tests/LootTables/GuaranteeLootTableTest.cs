@@ -14,7 +14,7 @@ public class GuaranteeLootTableTest
         var skeleton = typeof(Skeleton);
         
         // Act
-        table.RegisterFor(skeleton, [typeof(BoneClub), typeof(SkullHelmet)]);
+        table.RegisterFor(skeleton, [() => new BoneClub(), () => new SkullHelmet()]);
         
         // Assert
         Assert.Equal([skeleton], table.EnemyTypes);
@@ -23,7 +23,7 @@ public class GuaranteeLootTableTest
         var slime = typeof(Slime);
         
         // Act
-        table.RegisterFor(slime, [typeof(AcidicSlimeBall)]);
+        table.RegisterFor(slime, [() => new AcidicSlimeBall()]);
         
         // Assert
         Assert.Equal([skeleton, slime], table.EnemyTypes);
@@ -37,7 +37,7 @@ public class GuaranteeLootTableTest
         var skeleton = new Skeleton();
         var club = new BoneClub();
         var helmet = new SkullHelmet();
-        table.RegisterFor(typeof(Skeleton), [typeof(BoneClub), typeof(SkullHelmet)]);
+        table.RegisterFor(typeof(Skeleton), [() => new BoneClub(), () => new SkullHelmet()]);
         
         // Act
         var loots = table.LootFor(skeleton);

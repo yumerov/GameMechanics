@@ -10,7 +10,11 @@ public static class OneOfManyLootTableRegister
     {
         var table = new OneOfManyLootTable();
     
-        table.RegisterFor(typeof(Skeleton), [typeof(BoneDagger), typeof(BoneClub), typeof(SkullHelmet)]);
+        table.RegisterFor(typeof(Skeleton), [
+            () => new BoneDagger(),
+            () => new BoneClub(),
+            () => new SkullHelmet()
+        ]);
         
         return table;
     }

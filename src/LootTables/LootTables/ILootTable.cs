@@ -5,6 +5,6 @@ namespace LootTables.LootTables;
 
 public interface ILootTable
 {
-    public void RegisterFor(Type enemyType, List<Type> items);
+    public void RegisterFor(Type enemyType, List<Func<LootItem>> itemFactories);
     public List<LootItem> LootFor(LootableEnemy enemy);
 }
