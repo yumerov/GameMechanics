@@ -9,3 +9,8 @@ Guaranteed drop/loot. Example: each enemy drops predetermined amount of experien
 ## One of Many
 
 Getting one item of many items. Example: the mob can drop one of given weapon or armor set.
+
+## Composite
+
+Contains at least one loot table instance. When try to get loots, combines the result of composited loot tables.
+Example: Composite of guarantee and one of many - guaranteed experience, gold and one of many weapons/armors.
