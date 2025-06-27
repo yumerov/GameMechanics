@@ -6,18 +6,18 @@ namespace LootTables.Tests.LootTables;
 
 public class CompositeLootTableTest
 {
-    private readonly Type _skeleton = typeof(Skeleton);
-    private readonly Type _slime = typeof(Slime);
+    private static readonly Type Skeleton = typeof(Skeleton);
+    private static readonly Type Slime = typeof(Slime);
 
     [Fact]
     public void EnemyTypes()
     {
         // Arrange
         var goldLootTable = new GuaranteeLootTable();
-        goldLootTable.RegisterFor(_skeleton, [() => new SmallGoldBag()]);
-        goldLootTable.RegisterFor(_slime, [() => new SmallGoldBag()]);
+        goldLootTable.RegisterFor(Skeleton, [() => new SmallGoldBag()]);
+        goldLootTable.RegisterFor(Slime, [() => new SmallGoldBag()]);
         var experienceLootTable = new GuaranteeLootTable();
-        experienceLootTable.RegisterFor(_skeleton, [() => new SmallExperiencePack()]);
+        experienceLootTable.RegisterFor(Skeleton, [() => new SmallExperiencePack()]);
         
         var table = new CompositeLootTable([goldLootTable, experienceLootTable]);
         
@@ -25,7 +25,7 @@ public class CompositeLootTableTest
         var enemyTypes = table.EnemyTypes;
         
         // Assert
-        Assert.Equal([_skeleton, _slime], enemyTypes);
+        Assert.Equal([Skeleton, Slime], enemyTypes);
     }
 
     [Fact]
@@ -33,10 +33,10 @@ public class CompositeLootTableTest
     {
         // Arrange
         var goldLootTable = new GuaranteeLootTable();
-        goldLootTable.RegisterFor(_skeleton, [() => new SmallGoldBag()]);
-        goldLootTable.RegisterFor(_slime, [() => new SmallGoldBag()]);
+        goldLootTable.RegisterFor(Skeleton, [() => new SmallGoldBag()]);
+        goldLootTable.RegisterFor(Slime, [() => new SmallGoldBag()]);
         var experienceLootTable = new GuaranteeLootTable();
-        experienceLootTable.RegisterFor(_skeleton, [() => new SmallExperiencePack()]);
+        experienceLootTable.RegisterFor(Skeleton, [() => new SmallExperiencePack()]);
         var weaponLootTable = new OneOfManyLootTable();
         weaponLootTable.RegisterFor(typeof(Skeleton), [
             () => new BoneDagger(),
@@ -51,9 +51,10 @@ public class CompositeLootTableTest
         Assert.Equal(3, loots.Count);
         Assert.Equal(new SmallGoldBag().ToString(), loots[0].ToString());
         Assert.Equal(new SmallExperiencePack().ToString(), loots[1].ToString());
-        Assert.Contains<ILootItem>(
-            [new BoneDagger(), new BoneClub(), new SkullHelmet()],
-            item => item.ToString() == loots[2].ToString()
+        Assert.True(
+            new List<ILootItem>([new BoneDagger(), new BoneClub(), new SkullHelmet()])
+                .Any(item => item.ToString() == loots[2].ToString()),
+            $"Expected one of [BoneDagger, BoneClub, SkullHelmet] but got {loots[2]}"
         );
     }
 }

@@ -11,7 +11,7 @@ namespace LootTables.App;
 public class App
 {
     public static readonly Dim ColWidth = Dim.Percent(33)!;
-    public ILootTable? _lootTable;
+    private ILootTable? _lootTable;
 
     private readonly ObservableCollection<ILootTable> _menuItems =
     [
@@ -52,6 +52,7 @@ public class App
 
         if (_lootTable == null)
         {
+            Console.WriteLine("Warning: No loot table selected.");
             return;
         }
         
@@ -60,7 +61,7 @@ public class App
             return;
         }
 
-        var loots = _lootTable!.LootFor(enemy);
+        var loots = _lootTable.LootFor(enemy);
         foreach (var loot in loots)
         {
             _logs.Add($"[{_lootTable}] {enemy} loot: {loot}");

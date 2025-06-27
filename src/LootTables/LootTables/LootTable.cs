@@ -4,7 +4,7 @@ using LootTables.LootTables.Contracts;
 
 namespace LootTables.LootTables;
 
-public abstract class LootTable : ILootTable, ISingleLootLootTable, IRegisterableLooTable
+public abstract class LootTable : ILootTable, ISingleLootLootTable, IRegisterableLootTable
 {
     private readonly Dictionary<Type, List<Func<ILootItem>>> _enemyItemFactoriesMap = new();
     public IReadOnlyCollection<Type> EnemyTypes => _enemyItemFactoriesMap.Keys;
