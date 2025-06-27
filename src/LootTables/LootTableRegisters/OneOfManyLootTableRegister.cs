@@ -4,6 +4,9 @@ using LootTables.LootTables;
 
 namespace LootTables.LootTableRegisters;
 
+/// <summary>
+/// Simulates reading from a file edited by the game designer/balancer
+/// </summary>
 public static class OneOfManyLootTableRegister
 {
     public static ILootTable DefaultInit()
